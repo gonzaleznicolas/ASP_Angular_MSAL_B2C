@@ -73,7 +73,7 @@ namespace ASP_Angular_B2C_Test
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action}");
             });
 
             app.UseSpa(spa =>
