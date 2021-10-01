@@ -8,6 +8,8 @@ import { filter } from 'rxjs/operators';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
+  loginDisplay = false;
+
   constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
 
   ngOnInit(): void {
@@ -18,5 +20,17 @@ export class HomeComponent implements OnInit {
       .subscribe((result: EventMessage) => {
         console.log(result);
       });
+
+    this.msalBroadcastService.inProgress$
+      .pipe(
+        filter((status: InteractionStatus) => status === InteractionStatus.None)
+      )
+      .subscribe(() => {
+        this.setLoginDisplay();
+      });
+  }
+
+  setLoginDisplay() {
+    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
 }
