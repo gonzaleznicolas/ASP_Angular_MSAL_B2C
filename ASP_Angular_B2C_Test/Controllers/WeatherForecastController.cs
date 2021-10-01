@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ASP_Angular_B2C_Test.Controllers
 {
-    //[Authorize]
+    // [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
