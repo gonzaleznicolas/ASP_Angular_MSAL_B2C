@@ -23,7 +23,6 @@ namespace ASP_Angular_B2C_Test
         public void ConfigureServices(IServiceCollection services)
         {
             // Adds Microsoft Identity platform (AAD v2.0) support to protect this Api
-            /*
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddMicrosoftIdentityWebApi(options =>
                     {
@@ -35,7 +34,6 @@ namespace ASP_Angular_B2C_Test
 
             // Creating policies that wraps the authorization requirements
             services.AddAuthorization();
-            */
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -67,8 +65,8 @@ namespace ASP_Angular_B2C_Test
             }
 
             app.UseRouting();
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
