@@ -10,7 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { MsalGuard, MsalBroadcastService, MsalModule, MsalService,
-  MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalInterceptorConfiguration, MSAL_INTERCEPTOR_CONFIG } from '@azure/msal-angular';
+  MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalInterceptorConfiguration, MSAL_INTERCEPTOR_CONFIG, MsalInterceptor } from '@azure/msal-angular';
 
 import { msalConfig, protectedResources } from './auth-config';
 
@@ -93,6 +93,11 @@ const isIframe = window !== window.parent && !window.opener;
     )
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+    },
     {
       provide: MSAL_INSTANCE,
       useFactory: MSALInstanceFactory
