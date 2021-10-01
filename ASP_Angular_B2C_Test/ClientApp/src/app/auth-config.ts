@@ -56,10 +56,12 @@ export const b2cPolicies = {
 }
 
 /**
- * An optional silentRequest object can be used to achieve silent SSO
- * between applications by providing a "login_hint" property.
+ * Add here the endpoints and scopes when obtaining an access token for protected web APIs. For more information, see:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
-export const silentRequest = {
-    scopes: ["openid", "profile"],
-    loginHint: "example@domain.net"
-};
+export const protectedResources = {
+    weatherForecastApi: {
+        endpoint: "https://localhost:44367/weatherforecast",
+        scopes: ["https://arcurvekeyvutest.onmicrosoft.com/f6def555-a6ad-41c8-b541-9bed0ec19066/access_as_user"],
+    }
+}

@@ -10,9 +10,9 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { MsalGuard, MsalBroadcastService, MsalModule, MsalService,
-  MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent } from '@azure/msal-angular';
+  MSAL_GUARD_CONFIG, MSAL_INSTANCE, MsalGuardConfiguration, MsalRedirectComponent, MsalInterceptorConfiguration, MSAL_INTERCEPTOR_CONFIG } from '@azure/msal-angular';
 
-import { msalConfig } from './auth-config';
+import { msalConfig, protectedResources } from './auth-config';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -24,6 +24,22 @@ import { MatListModule } from '@angular/material/list';
  */
  export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
+}
+
+/**
+ * MSAL Angular will automatically retrieve tokens for resources 
+ * added to protectedResourceMap. For more info, visit: 
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/initialization.md#get-tokens-for-web-api-calls
+ */
+ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
+  const protectedResourceMap = new Map<string, Array<string>>();
+
+  protectedResourceMap.set(protectedResources.weatherForecastApi.endpoint, protectedResources.weatherForecastApi.scopes);
+
+  return {
+    interactionType: InteractionType.Redirect,
+    protectedResourceMap
+  };
 }
 
 /**
@@ -84,6 +100,10 @@ const isIframe = window !== window.parent && !window.opener;
     {
       provide: MSAL_GUARD_CONFIG,
       useFactory: MSALGuardConfigFactory
+    },
+    {
+      provide: MSAL_INTERCEPTOR_CONFIG,
+      useFactory: MSALInterceptorConfigFactory
     },
     MsalService,
     MsalGuard,
