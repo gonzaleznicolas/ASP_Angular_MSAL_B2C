@@ -88,6 +88,6 @@ const isIframe = window !== window.parent && !window.opener;
     MsalGuard,
     MsalBroadcastService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }
