@@ -34,8 +34,8 @@ namespace ASP_Angular_B2C_Test.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
-            string owner = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            // HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+            // string owner = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
