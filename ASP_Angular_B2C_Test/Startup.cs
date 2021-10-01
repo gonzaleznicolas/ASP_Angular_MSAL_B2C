@@ -67,13 +67,13 @@ namespace ASP_Angular_B2C_Test
             }
 
             app.UseRouting();
-            // app.UseAuthentication();
-            // app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action}");
+                    pattern: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>

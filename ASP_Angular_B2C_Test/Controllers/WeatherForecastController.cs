@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ASP_Angular_B2C_Test.Controllers
 {
-    // [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -32,7 +32,7 @@ namespace ASP_Angular_B2C_Test.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> GetWeatherForecast()
+        public IEnumerable<WeatherForecast> Get()
         {
             HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
             string owner = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
