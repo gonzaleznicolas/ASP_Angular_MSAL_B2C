@@ -44,7 +44,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
  const routes: Routes = [
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [MsalGuard]
   },
   {
     path: '',
