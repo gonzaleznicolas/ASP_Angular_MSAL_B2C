@@ -41,6 +41,12 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  logout() { // Add log out function here
+    this.authService.logoutRedirect({
+      postLogoutRedirectUri: 'https://localhost:44367/'
+    });
+  }
+
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
